@@ -230,6 +230,14 @@ module VCR
     end
     alias filter_sensitive_data define_cassette_placeholder
 
+    # Allow to choose when to update_content_length_header
+    # Useful when you want to run this after filter_sensitive_data has been run
+    def update_content_length_header
+      before_playback do |interaction|
+        interaction.response.update_content_length_header
+      end
+    end
+
     # Gets the registry of cassette serializers. Use it to register a custom serializer.
     #
     # @example
